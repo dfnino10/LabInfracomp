@@ -17,6 +17,9 @@ import java.util.Date;
 
 public class ServerTheard extends Thread {
 
+	public final String sourceFilePath250 = "testimg.jpg";
+	public final String sourceFilePath500 = "500mb.mp4";
+	
 	private Socket socket = null;
 	private UDP udp;
 	
@@ -50,7 +53,10 @@ public class ServerTheard extends Thread {
 
 	}
 	public void setSourceFilePath(String pSourceFilePath ) {
-		sourceFilePath = pSourceFilePath;
+		if(pSourceFilePath.equalsIgnoreCase("250mb"))
+			sourceFilePath = sourceFilePath250;
+		else if(pSourceFilePath.equalsIgnoreCase("500mb"))
+			sourceFilePath = sourceFilePath250;
 	}
 	public void run() {
 		try {			
@@ -112,7 +118,10 @@ public class ServerTheard extends Thread {
 			if(messageClient.split(":")[1].equals("OK")){
 				log("Client: Integridad del Archivo verificada (Archivo completo)");
 			}else{
-				
+				int paquetesRecibidos = Integer.parseInt(messageClient.split(":")[2]);
+				int bytesRecibidos = Integer.parseInt(messageClient.split(":")[3]);
+				log("Client: Archivo incompleto. Paquetes Recibidos: " + paquetesRecibidos +
+						" Bytes Recibidos: " + bytesRecibidos);
 			}
 			log("==================== fin de envio ===================");
 			
@@ -182,7 +191,7 @@ public class ServerTheard extends Thread {
 		outputStream.writeObject(fileDesc);
 		
 		startTime = System.currentTimeMillis();
-		udp.sendFile(fileBytes, InetAddress.getByName("192.168.0.14"), 3030);
+		udp.sendFile(fileBytes, InetAddress.getByName("localhost"), 3030);
 		
 		Date date = new Date();
 		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");

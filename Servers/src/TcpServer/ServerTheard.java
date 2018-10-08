@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ServerTheard extends Thread {
+	
+	public final String sourceFilePath250 = "250mb.mp4";
+	public final String sourceFilePath500 = "500mb.dat";
 
 	private Socket socket = null;
 	private ObjectOutputStream outputStream = null;
@@ -44,7 +47,10 @@ public class ServerTheard extends Thread {
 
 	}
 	public void setSourceFilePath(String pSourceFilePath ) {
-		sourceFilePath = pSourceFilePath;
+		if(pSourceFilePath.equalsIgnoreCase("250mb"))
+			sourceFilePath = sourceFilePath250;
+		else if(pSourceFilePath.equalsIgnoreCase("500mb"))
+			sourceFilePath = sourceFilePath250;
 	}
 	public void run() {
 		try {			

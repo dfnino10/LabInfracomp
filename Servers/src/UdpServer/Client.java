@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 
 public class Client {
 	private Socket socket = null;
@@ -21,6 +22,9 @@ public class Client {
 
 	private String messageServer ="";
 	private String messageClient ="";
+	
+	private int paquetesRecibidos;
+	private int bytesRecibidos;
 
 	public Client() {
 		try {
@@ -37,7 +41,7 @@ public class Client {
 	public void connect() {
 		while (!isConnected) {
 			try {
-				socket = new Socket("localHost", 3010);
+				socket = new Socket("localhost", 3010);
 				
 				udp = new UDP();
 				outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -63,7 +67,7 @@ public class Client {
 		fileDesc = (FileDescription) inputStream.readObject();
 		System.out.println("Descripcion archivo recibida");
 		
-		byte[][] fileBytes = udp.receiveFile(3030, fileDesc.getNumPaquetes());
+		ArrayList<byte[]> chunks= udp.receiveFile(3030, fileDesc.getNumPaquetes());
 
 		endTime = System.currentTimeMillis();
 
@@ -80,9 +84,14 @@ public class Client {
 		dstFile = new File(outputFile);
 		fileOutputStream = new FileOutputStream(dstFile);
 		
-		for (int i = 0; i < fileBytes.length; i++) {
-			fileOutputStream.write(fileBytes[i]);
+		paquetesRecibidos=chunks.size();
+		bytesRecibidos=0;
+		for (int i = 0; i < chunks.size(); i++) {
+			byte[] chunk= chunks.get(i);
+			fileOutputStream.write(chunk);
+			bytesRecibidos+=chunk.length;
 		}
+		
 		
 		fileOutputStream.flush();
 		fileOutputStream.close();
@@ -156,7 +165,7 @@ public class Client {
 						outputStream.writeObject(messageClient);
 					}
 					else {
-						messageClient="LOG:ERROR:#:#";
+						messageClient="LOG:ERROR:"+paquetesRecibidos+":"+bytesRecibidos;
 						outputStream.writeObject(messageClient);
 					}
 				}

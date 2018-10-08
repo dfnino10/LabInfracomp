@@ -1,0 +1,68 @@
+Client: hola
+Server Thread finalizado
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 10:36:02 08/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 1 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: Archivo recibido
+Tiempo de transferencia: 4887
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:38:57 08/10/2018
+Archivo enviado: Name: testimg.jpg Size: 158569 #Chunks: 16 Hash: e1e33b907c77571548a2f0430b0aa956
+Client: Archivo recibido
+Tiempo de transferencia: 10409
+==================== fin de envio ===================
+Server Thread finalizado
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:43:16 08/10/2018
+Archivo enviado: Name: testimg.jpg Size: 158569 #Chunks: 16 Hash: e1e33b907c77571548a2f0430b0aa956
+Client: Archivo recibido
+Tiempo de transferencia: 10343
+Client: Archivo incompleto. Paquetes Recibidos: 0Bytes Recibidos: 0
+==================== fin de envio ===================
+Server Thread finalizado
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:46:34 08/10/2018
+Archivo enviado: Name: testimg.jpg Size: 158569 #Chunks: 16 Hash: e1e33b907c77571548a2f0430b0aa956
+Client: Archivo recibido
+Tiempo de transferencia: 14086
+Client: Archivo incompleto. Paquetes Recibidos: 9 Bytes Recibidos: 90000
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:49:32 08/10/2018
+Archivo enviado: Name: testimg.jpg Size: 158569 #Chunks: 16 Hash: e1e33b907c77571548a2f0430b0aa956
+Client: Archivo recibido
+Tiempo de transferencia: 13927
+Client: Archivo incompleto. Paquetes Recibidos: 9 Bytes Recibidos: 90000
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:51:58 08/10/2018
+Archivo enviado: Name: testimg.jpg Size: 158569 #Chunks: 16 Hash: e1e33b907c77571548a2f0430b0aa956
+Client: Archivo recibido
+Tiempo de transferencia: 8025
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================

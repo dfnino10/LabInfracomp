@@ -12,6 +12,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import ServerClientNetwork.MyFTP.ChecksumGen;
@@ -44,7 +45,7 @@ public class UDP {
 
 			byte[] data = outputStream.toByteArray();
 			DatagramPacket sendPacket = new DatagramPacket(data, data.length, address, port);
-			Thread.sleep(50);
+			Thread.sleep(100);
 			socket.send(sendPacket);
 			System.out.println("Paquete enviado");
 			current+= size;
@@ -53,11 +54,11 @@ public class UDP {
 
 
 	}
-	public byte[][] receiveFile(int port,int chunks) throws Exception
+	public ArrayList<byte[]> receiveFile(int port,int chunks) throws Exception
 	{
 		socket = new DatagramSocket(port);
 		socket.setSoTimeout(timeout);
-		byte[][] file= new byte[chunks][1];
+		ArrayList<byte[]> paquetes = new ArrayList<byte[]>();
 		int i = 0; 
 		while (i<chunks)
 		{
@@ -70,14 +71,14 @@ public class UDP {
 				byte[] data = incomingPacket.getData();
 				ByteArrayInputStream in = new ByteArrayInputStream(data);
 				ObjectInputStream is = new ObjectInputStream(in);
-				file[i]= (byte[]) is.readObject();
+				paquetes.add( (byte[]) is.readObject() );
 				i++;
 			}catch (SocketTimeoutException e)
 			{
 				System.out.println("Archivo incompleto");
-				return file;
+				return paquetes;
 			}
 		}
-		return file;
+		return paquetes;
 	}
 }

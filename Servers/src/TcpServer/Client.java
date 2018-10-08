@@ -13,7 +13,7 @@ public class Client {
 
 	File dstFile = null;
 	FileDescription fileDesc=null;
-	private String destinationPath = "D:/FFOutput/download";
+	private String destinationPath = "archivos";
 
 	private String messageServer ="";
 	private String messageClient ="";
@@ -28,7 +28,7 @@ public class Client {
 	public void connect() {
 		while (!isConnected) {
 			try {
-				socket = new Socket("localHost", 3010);
+				socket = new Socket("157.253.205.14", 3010);
 				outputStream = new ObjectOutputStream(socket.getOutputStream());
 				inputStream = new ObjectInputStream(socket.getInputStream());
 				isConnected = true;

@@ -15,8 +15,6 @@ public class Server {
 
 	private ServerSocket serverSocket = null;
 
-	private String sourceFilePath = "testimg.jpg";
-
 	public Server() {
 		try {
 			address = InetAddress.getLocalHost();
@@ -58,8 +56,10 @@ public class Server {
 				System.out.println("Enviar archivo? (Y/N)");
 				inputLine = br.readLine();
 				if(inputLine.equalsIgnoreCase("y")) {
+					System.out.println("Que archivo desea enviar? (250/500)mb");
+					inputLine = br.readLine();
 					for (ServerTheard serverTheard : threads) {
-						serverTheard.setSourceFilePath(sourceFilePath);
+						serverTheard.setSourceFilePath(inputLine);
 						serverTheard.start();
 					}
 				}

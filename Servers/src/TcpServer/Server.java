@@ -14,7 +14,7 @@ public class Server {
 
 	private ServerSocket serverSocket = null;
 
-	private String sourceFilePath = "D:/FFOutput/san-gil-2.mp4";
+	
 
 	public Server() {
 		try {
@@ -54,9 +54,15 @@ public class Server {
 				System.out.println("Enviar archivo? (Y/N)");
 				inputLine = br.readLine();
 				if(inputLine.equalsIgnoreCase("y")) {
-					for (ServerTheard serverTheard : threads) {
-						serverTheard.setSourceFilePath(sourceFilePath);
-						serverTheard.start();
+					
+					System.out.println("Cantidad de Clientes? max: " + numClients);
+					inputLine = br.readLine();
+					int cantidad = Integer.parseInt(inputLine);
+					System.out.println("Que archivo desea enviar? (250/500)mb");
+					inputLine = br.readLine();
+					for (int i = 0; i < cantidad; i++)  {
+						threads.get(i).setSourceFilePath(inputLine);
+						threads.get(i).start();
 					}
 				}
 				else{
