@@ -1,0 +1,188 @@
+Client: hola
+Client: hola
+Server Thread finalizado
+Client: hola
+Client: hola
+Client: hola
+Client: hola
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 10:50:12 10/10/2018
+Archivo enviado: Name: 500mb.dat Size: 536870912 #Chunks: 5369 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Client: Archivo recibido
+Tiempo de transferencia: 19466
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:17:10 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: Archivo recibido
+Tiempo de transferencia: 11891
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:19:12 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:22:49 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:26:25 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: Archivo recibido
+Tiempo de transferencia: 5603
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:30:57 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: Archivo recibido
+Tiempo de transferencia: 5836
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Fecha y hora de envio: 11:52:37 10/10/2018
+Archivo enviado: Name: 250mb.mp4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Client: Archivo recibido
+Tiempo de transferencia: 6745
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 250mb.MP4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Fecha y hora de envio: 16:33:16 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 6656
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 500mb.dat Size: 536870912 #Chunks: 5369 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Fecha y hora de envio: 16:34:19 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 13321
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 250mb.MP4 Size: 260882469 #Chunks: 2609 Hash: de17d1e9cf76c77f2b0db3116ba21dee
+Fecha y hora de envio: 16:41:20 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 6565
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Server Thread finalizado
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 500mb.dat Size: 536870912 #Chunks: 5369 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Fecha y hora de envio: 16:42:09 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 13420
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 500mb.dat Size: 536870912 #Chunks: 5369 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Fecha y hora de envio: 17:41:51 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 13731
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 18218 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 18:33:43 10/10/2018
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 18218 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 18:40:36 10/10/2018
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 18218 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 18:46:26 10/10/2018
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 1822 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 19:21:35 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 22529
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 1822 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 19:26:54 10/10/2018
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: DJI_0008.MP4 Size: 1821736512 #Chunks: 1822 Hash: 2920cd8576725b269ecfb9d798b0a849
+Fecha y hora de envio: 19:32:42 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 68186
+==================== fin de envio ===================
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 500mb.dat Size: 536870912 #Chunks: 537 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Fecha y hora de envio: 19:38:53 10/10/2018
+Client: hola:192.168.243.1
+Client IP: 192.168.243.1
+Peticion de envio al cliente
+Client: READY
+Inicio de envio
+Descripcion del Archivo: Name: 500mb.dat Size: 536870912 #Chunks: 537 Hash: aa559b4e3523a6c931f08f4df52d58f2
+Fecha y hora de envio: 19:39:59 10/10/2018
+Client: Archivo recibido
+Tiempo de transferencia: 6252
+Client: Integridad del Archivo verificada (Archivo completo)
+==================== fin de envio ===================

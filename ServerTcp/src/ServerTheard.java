@@ -1,4 +1,3 @@
-package UdpServer;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -17,26 +16,23 @@ import java.util.Date;
 
 public class ServerTheard extends Thread {
 
-	public final String sourceFilePath250 = "testimg.jpg";
-	public final String sourceFilePath500 = "500mb.mp4";
-	
+	public final int packetsize = 1000000;
+
 	private Socket socket = null;
-	private UDP udp;
-	
 	private ObjectOutputStream outputStream = null;
 	private ObjectInputStream inputStream = null;
 
-	private int userId;
 	private int idSession;
 	
 	private InetAddress clientAddress;
 
-	String sourceFilePath = "";
+	String sourcePath="";
+
 	private String messageServer ="";
 	private String messageClient ="";
-	
+
 	File log;
-	
+
 	boolean end = false;
 
 	public ServerTheard(Socket socket , int pIdSession) {
@@ -44,7 +40,6 @@ public class ServerTheard extends Thread {
 			idSession=pIdSession;
 			outputStream = new ObjectOutputStream(socket.getOutputStream());
 			inputStream = new ObjectInputStream(socket.getInputStream());
-			udp = new UDP();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -52,23 +47,23 @@ public class ServerTheard extends Thread {
 		}
 
 	}
-	public void setSourceFilePath(String pSourceFilePath ) {
-		if(pSourceFilePath.equalsIgnoreCase("250mb"))
-			sourceFilePath = sourceFilePath250;
-		else if(pSourceFilePath.equalsIgnoreCase("500mb"))
-			sourceFilePath = sourceFilePath250;
-	}
+
 	public void run() {
 		try {			
-			if(!sourceFilePath.equals("")) {
+			if(!sourcePath.equals("")) {
 				clientReady();
 				sendFileProtocol();
+
 			}
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
+	}
+	public void setSourcePath(String pPath){
+		sourcePath= pPath;
 	}
 	public void initProtocol() throws Exception{
 
@@ -96,114 +91,130 @@ public class ServerTheard extends Thread {
 
 	public void sendFileProtocol() throws Exception{
 
-			// ========== Servidor inicia envio ==========
-			messageServer="START";
-			outputStream.writeObject(messageServer);
-			log("Inicio de envio");
+		// ========== Servidor inicia envio ==========
+		messageServer="START";
+		outputStream.writeObject(messageServer);
+		log("Inicio de envio");
+		// =============== generacion y envio de descripcion ====================
+		generateFileDescription(sourcePath);
+		// =============== lectura y envio del archivo ====================
+		long startTime = sendFile(sourcePath);;
 
-			long startTime = sendFile();
+		// ========== Cliente recibe completo ==========
+		messageClient= (String) inputStream.readObject();
+		if(messageClient.split(":")[0].equals("RECIBED")){
+			log("Client: Archivo recibido");
+		}
+		
+		long endTime = Long.parseLong(messageClient.split(":")[1]);
+		log("Tiempo de transferencia: "+(endTime-startTime));
+		//=========== info log =========================
+		messageClient= (String) inputStream.readObject();
+		if(messageClient.split(":")[1].equals("OK")){
+			log("Client: Integridad del Archivo verificada (Archivo completo)");
+		}else{
 
-			// ========== Cliente recibe completo ==========
-			messageClient= (String) inputStream.readObject();
-			if(messageClient.split(":")[0].equals("RECIBED")){
-				log("Client: Archivo recibido");
-			}else{
-				
-			}
-			
-			long endTime = Long.parseLong(messageClient.split(":")[1]);
-			log("Tiempo de transferencia: "+(endTime-startTime));
-			//=========== info log =========================
-			messageClient= (String) inputStream.readObject();
-			if(messageClient.split(":")[1].equals("OK")){
-				log("Client: Integridad del Archivo verificada (Archivo completo)");
-			}else{
-				int paquetesRecibidos = Integer.parseInt(messageClient.split(":")[2]);
-				int bytesRecibidos = Integer.parseInt(messageClient.split(":")[3]);
-				log("Client: Archivo incompleto. Paquetes Recibidos: " + paquetesRecibidos +
-						" Bytes Recibidos: " + bytesRecibidos);
-			}
-			log("==================== fin de envio ===================");
-			
+		}
+		log("==================== fin de envio ===================");
+
+		sourcePath = "";
 
 	}
 	public void endProtocol() throws Exception{
-		// ========== Servidor inicia envio ==========
+		// ========== Servidor finaliza  ==========
 		messageServer="END";
 		outputStream.writeObject(messageServer);
 		log("Server Thread finalizado");
 	}
-	/**
-	 * Sending FileEvent object.
-	 */
-	private long sendFile() throws Exception {
-		long startTime = 0;
-		
+	private void generateFileDescription(String pPath)throws Exception{
 		FileDescription fileDesc = new FileDescription();
-		byte[] fileBytes = null;
-
-		String fileName = sourceFilePath.substring(sourceFilePath.lastIndexOf("/") + 1, sourceFilePath.length());
-		String path = sourceFilePath.substring(0, sourceFilePath.lastIndexOf("/") + 1);
-
+		String fileName = pPath.substring(pPath.lastIndexOf("/") + 1, pPath.length());
+		
 		fileDesc.setFilename(fileName);
-		fileDesc.setSourceDirectory(sourceFilePath);
-
-
-		File file = new File(sourceFilePath);
+		fileDesc.setSourceDirectory(pPath);
+		File file = new File(pPath);
 		if (file.isFile()) {
-			try {
-				// ============= archivo a byte array =====================
-				DataInputStream diStream = new DataInputStream(new FileInputStream(file));
+			try{
 				long len = (long) file.length();
-				fileBytes = new byte[(int) len];
-				int read = 0;
-				int numRead = 0;
-				while (read < fileBytes.length && (numRead = diStream.read(fileBytes, read, fileBytes.length - read)) >= 0) {
-					read = read + numRead;
-				}
-				fileDesc.setNumPaquetes((int) Math.ceil(((double)len/(double) udp.packetsize)));
+				int chunks = (int) Math.ceil(((double)len/(double) packetsize));
+				fileDesc.setNumPaquetes(chunks);
 				fileDesc.setFileSize(len);
-				
 				// ================ hash de integridad ======================
 				MessageDigest md5Digest = MessageDigest.getInstance("MD5");
-				
-				//Get the checksum
+
 				FileChecksum fc = new FileChecksum();
 				String checksum = fc.getFileChecksum(md5Digest, file);
 				fileDesc.setHash(checksum);
-			
+
 				//============================================================	
 				fileDesc.setStatus("Success");
-
-			} catch (Exception e) {
+			}catch (Exception e) {
 				e.printStackTrace();
 				fileDesc.setStatus("Error");
 			}
-		} 
+		}
 		else {
-
-			log("Ruta del archivo no encontrada");
+			System.out.println("Ruta del archivo no encontrada");
 			fileDesc.setStatus("Error");
 		}
-		//Envio del archivo y descripcion por el sockets 
+		// =============== Envia la descripcion del archivo ====================
+		outputStream.writeObject(fileDesc);
+		log("Descripcion del Archivo: "+fileDesc );
+	}
+	private long sendFile(String pPath) throws Exception{
 
 		// ================= envio de archivos ======================
-		outputStream.writeObject(fileDesc);
-		
-		startTime = System.currentTimeMillis();
-		udp.sendFile(fileBytes, InetAddress.getByName("localhost"), 3030);
-		
-		Date date = new Date();
-		DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-		log("Fecha y hora de envio: "+hourdateFormat.format(date));
-		log("Archivo enviado: "+fileDesc );
+		long startTime = 0;
+
+		File file = new File(pPath);
+		if (file.isFile()) {
+
+			
+			DataInputStream diStream = new DataInputStream(new FileInputStream(file));
+			long len = (long) file.length();
+			
+			Date date = new Date();
+			DateFormat hourdateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+			log("Fecha y hora de envio: "+hourdateFormat.format(date));
+			startTime = System.currentTimeMillis();
+			
+			long current = 0;
+			int read = 0;
+			byte[] fileBytes= new byte[packetsize];
+			while (current < len)
+			{	
+				int size = packetsize;
+				if (len - current < size){
+					size = (int) (len - current);
+				}
+				if(size!=packetsize){
+					fileBytes=new byte[size];
+				}
+				System.gc();
+				int numRead = 0;
+				// ================= lectura de chunk ======================
+				numRead = diStream.read(fileBytes, 0, size);
+				// ================= envio de chunk ======================
+				outputStream.writeObject(fileBytes);
+				read += numRead;
+
+				current+= size;
+			}
+			diStream.close();
+
+		} 
+		else {
+			System.out.println("Ruta del archivo no encontrada");
+			
+		}
 		return startTime;
 	}
-	
+
+
 	public void log(String text)
 	{
 		try {
-			log = new File("/home/s3g3/serverTcp/logTcp/server" + (idSession+1));
+			log = new File("logTcp/server" + (idSession+1));
 			PrintWriter writer = new PrintWriter(new FileWriter(log,true));
 			writer.println(text);
 			writer.close();

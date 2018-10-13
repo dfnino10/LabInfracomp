@@ -15,8 +15,6 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import ServerClientNetwork.MyFTP.ChecksumGen;
-
 public class UDP {
 
 	private DatagramSocket socket = null;
